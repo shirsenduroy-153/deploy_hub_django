@@ -22,10 +22,11 @@ jobs:
 
       - name: 🚀 Deploy Application (Docker Compose)
         run: |
-          docker compose -f docker-compose.yml down --remove-orphans || true
-          docker rm -f $(docker compose -f docker-compose.yml ps -a -q 2>/dev/null) 2>/dev/null || true
-          docker rm -f deploy_hub_django deploy_hub_django_container deploy_testing_container 2>/dev/null || true
-          docker compose -f docker-compose.yml up --build --force-recreate --remove-orphans -d
+          docker compose -p deployhub-deploy_hub_django -f docker-compose.yml down --remove-orphans || true
+          docker rm -f $(docker compose -p deployhub-deploy_hub_django -f docker-compose.yml ps -a -q 2>/dev/null) 2>/dev/null || true
+          docker rm -f deployhub-deploy_hub_django deploy_hub_django deploy_hub_django_container 2>/dev/null || true
+          sed -i -E 's/([0-9]+):([0-9]+)/8000:\2/g' docker-compose.yml 2>/dev/null || true
+          docker compose -p deployhub-deploy_hub_django -f docker-compose.yml up --build --force-recreate --remove-orphans -d
 
       - name: 🩺 Verify Health Check & Status
         run: |
