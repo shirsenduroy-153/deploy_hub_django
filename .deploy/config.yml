@@ -1,8 +1,8 @@
-app_name: "deploy_hub_django_2"
+app_name: "deploy_hub_django_567"
 framework: "django"
 deployment_type: "compose"
 environment: "production"
-port: 8002
+port: 8001
 working_directory: "./"
 install_command: "pip install -r requirements.txt"
 build_command: "python manage.py collectstatic --noinput"
