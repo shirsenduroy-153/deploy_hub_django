@@ -31,6 +31,7 @@ class RootView(APIView):
 class HelloView(APIView):
     def get(self, request):
         name = request.query_params.get("name", "World")
+        print("djfndslfd")
         hostname, host_address = get_host_details()
         return Response({
             "status": "SUCCESS",
